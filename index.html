@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="wo">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0B1020">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="BIA">
+
+<link rel="apple-touch-icon" sizes="180x180" href="icone-180.png">
+<link rel="icon" type="image/png" sizes="32x32" href="icone-32.png">
+<link rel="manifest" href="manifeste.json">
+<title>BIA — KHALAM</title>
+<style>
+  :root{ --or:#C9A227; --fond:#0B1020; --doux:rgba(201,162,39,.55); }
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%}
+  body{
+    background:var(--fond); color:var(--or);
+    font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    padding:calc(24px + env(safe-area-inset-top)) 24px calc(24px + env(safe-area-inset-bottom));
+    text-align:center; user-select:none; -webkit-user-select:none;
+  }
+
+  /* Son visage, pas un logo. C'est elle qu'on vient voir. */
+  .portrait{ position:relative; width:148px; height:148px }
+  .portrait img{
+    width:100%; height:100%; border-radius:50%; object-fit:cover; display:block;
+    border:1px solid rgba(201,162,39,.35);
+  }
+  /* Une onde qui s'éloigne : une voix, pas un chargement. */
+  .portrait i{
+    position:absolute; inset:-10px; border-radius:50%;
+    border:1px solid rgba(201,162,39,.45);
+    animation:onde 3.4s ease-out infinite;
+  }
+  .portrait i:nth-child(3){ animation-delay:1.7s }
+  @keyframes onde{
+    0%  { transform:scale(.92); opacity:.55 }
+    70% { opacity:0 }
+    100%{ transform:scale(1.22); opacity:0 }
+  }
+  @media (prefers-reduced-motion:reduce){ .portrait i{ animation:none; opacity:.25 } }
+
+  .nom{ margin-top:22px; font-size:15px; font-weight:700; letter-spacing:.44em; text-indent:.44em }
+  .devise{ margin-top:10px; font-size:12.5px; color:var(--doux); font-style:italic }
+  .maison{ margin-top:14px; font-size:10px; font-weight:600; color:var(--doux);
+           letter-spacing:.34em; text-indent:.34em }
+
+  .barre{ margin-top:30px; width:min(210px,60vw); height:1px;
+          background:rgba(201,162,39,.18); overflow:hidden }
+  .barre i{ display:block; height:100%; width:38%;
+            background:linear-gradient(90deg,transparent,var(--or),transparent);
+            animation:glisse 1.9s ease-in-out infinite }
+  @keyframes glisse{ 0%{transform:translateX(-110%)} 100%{transform:translateX(320%)} }
+
+  .etat{ margin-top:16px; font-size:13.5px; min-height:1.6em }
+  .etat-fr{ margin-top:3px; font-size:11.5px; color:var(--doux); min-height:1.5em }
+
+  .lien{ margin-top:20px; display:inline-block; font-size:12.5px; color:var(--or);
+         text-decoration:none; border-bottom:1px solid rgba(201,162,39,.4);
+         padding-bottom:2px; opacity:0; pointer-events:none; transition:opacity .4s }
+  .lien.visible{ opacity:1; pointer-events:auto }
+
+  /* Poser le raccourci depuis CETTE page : sinon l'iPhone enregistre l'adresse
+     du serveur, et la marque disparaît de l'écran d'accueil. */
+  .poser{ position:fixed; left:0; right:0; bottom:calc(18px + env(safe-area-inset-bottom));
+          text-align:center }
+  .poser button{ background:none; border:0; color:var(--doux); font:inherit; font-size:11.5px;
+                 letter-spacing:.06em; padding:10px 16px; cursor:pointer }
+  .mode-emploi{ display:none; max-width:300px; margin:22px auto 0; font-size:13px;
+                color:var(--doux); line-height:1.7; text-align:left }
+  .mode-emploi.visible{ display:block }
+  .mode-emploi b{ color:var(--or); font-weight:600 }
+</style>
+</head>
+<body>
+
+  <div class="portrait">
+    <img src="icone-512.png" alt="BIA" width="148" height="148">
+    <i aria-hidden="true"></i>
+    <i aria-hidden="true"></i>
+  </div>
+
+  <div class="nom">BIA</div>
+  <div class="devise">Wolof mooy sama làkk bu njëkk</div>
+  <div class="maison">KHALAM</div>
+
+  <div class="barre" aria-hidden="true"><i></i></div>
+  <div class="etat" id="etat" role="status" aria-live="polite">Xaaral tuuti…</div>
+  <div class="etat-fr" id="etat-fr">Un instant…</div>
+  <a class="lien" id="lien" href="https://bia-render.onrender.com/">Dugg léegi · Entrer maintenant</a>
+
+  <div class="mode-emploi" id="mode-emploi">
+    <div>1. Touchez le bouton <b>Partager</b> en bas de Safari — le carré avec une flèche.</div>
+    <div>2. Descendez jusqu’à <b>Sur l’écran d’accueil</b>.</div>
+    <div>3. Touchez <b>Ajouter</b>.</div>
+  </div>
+
+  <div class="poser"><button id="poser" type="button">Installer sur l’écran d’accueil</button></div>
+
+<script>
+  /* --------------------------------------------------------------------
+     Cette page n'existe que pour couvrir le réveil du serveur.
+
+     BIA est hébergée chez Render : le service s'endort après quinze minutes
+     sans visite et met environ une minute à revenir. Pendant ce temps Render
+     affiche SA page — fond noir, logo Render, « APPLICATION LOADING ». Sur
+     une démonstration, c'est la marque de l'hébergeur qu'on montre.
+
+     Cette page-ci vit sur GitHub Pages, toujours éveillé. Elle s'affiche tout
+     de suite, réveille BIA en arrière-plan, et ne bascule qu'une fois qu'elle
+     répond vraiment. Le visiteur ne voit que KHALAM.
+
+     On interroge /api/etat plutôt que la page d'accueil : tant que le service
+     dort, Render répond du HTML et la lecture JSON échoue. Une réponse
+     lisible est donc la preuve que c'est bien BIA qui parle.
+     -------------------------------------------------------------------- */
+  const SERVEUR = 'https://bia-render.onrender.com';
+
+  const etat = document.getElementById('etat');
+  const etatFr = document.getElementById('etat-fr');
+  const lien = document.getElementById('lien');
+
+  /* Durée d'affichage minimale. Quand le serveur est déjà réveillé il répond
+     en une fraction de seconde : la page disparaissait avant qu'on ait vu son
+     visage. Trois secondes, c'est le temps de reconnaître quelqu'un. */
+  const MINIMUM_MS = 3000;
+
+  const depart = Date.now();
+  let essais = 0;
+  let suspendu = false;
+
+  /* Le silence inquiète : on dit où on en est, dans les deux langues. */
+  function message() {
+    const s = (Date.now() - depart) / 1000;
+    if (s < 4)  return ['Xaaral tuuti…', 'Un instant…'];
+    if (s < 20) return ['Bàyyil ma tuuti…', 'Elle se réveille…'];
+    if (s < 45) return ['Ay simili rekk…', 'Encore quelques secondes…'];
+    return ['Bul ragal, système bi rekk moo di daw tuuti !',
+            'Le réveil est plus long que d’habitude.'];
+  }
+
+  async function debout() {
+    try {
+      const r = await fetch(SERVEUR + '/api/etat', { cache: 'no-store' });
+      if (!r.ok) return false;
+      const j = await r.json();
+      // `modele` n'existe que dans NOTRE réponse : la page d'attente de
+      // Render, elle, ne renvoie pas de JSON du tout.
+      return Boolean(j && typeof j.modele === 'string');
+    } catch {
+      return false; // service endormi, réseau coupé, ou réponse illisible
+    }
+  }
+
+  async function boucle() {
+    if (suspendu) { setTimeout(boucle, 1000); return; }
+
+    if (await debout()) {
+      etat.textContent = 'BIA mungi fi.';
+      etatFr.textContent = 'BIA est là.';
+      const reste = MINIMUM_MS - (Date.now() - depart);
+      if (reste > 0) await new Promise((r) => setTimeout(r, reste));
+      location.replace(SERVEUR + '/');
+      return;
+    }
+
+    essais += 1;
+    const [wo, fr] = message();
+    etat.textContent = wo;
+    etatFr.textContent = fr;
+
+    // Au-delà d'une minute et demie, on cesse de décider à sa place :
+    // le lien est là, il entre quand il veut.
+    if (Date.now() - depart > 90000) lien.classList.add('visible');
+
+    setTimeout(boucle, essais < 6 ? 1500 : 3000);
+  }
+
+  /* Un appui sur « Installer » suspend la bascule : l'adresse doit rester
+     celle-ci pendant qu'il pose le raccourci. */
+  const poser = document.getElementById('poser');
+  const modeEmploi = document.getElementById('mode-emploi');
+  poser.addEventListener('click', () => {
+    suspendu = true;
+    modeEmploi.classList.add('visible');
+    etat.textContent = 'Taxawal na tuuti.';
+    etatFr.textContent = 'Ouverture suspendue.';
+    lien.classList.add('visible');
+    poser.remove();
+  });
+
+  boucle();
+</script>
+</body>
+</html>
