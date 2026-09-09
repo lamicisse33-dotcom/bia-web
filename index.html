@@ -119,7 +119,15 @@
      dort, Render répond du HTML et la lecture JSON échoue. Une réponse
      lisible est donc la preuve que c'est bien BIA qui parle.
      -------------------------------------------------------------------- */
-  const SERVEUR = 'https://bia-render.onrender.com';
+  /* Deux adresses, dans cet ordre de préférence.
+
+     La première est le nom de KHALAM, à brancher sur Render quand tu veux :
+     tant qu'il n'existe pas, la requête échoue en une fraction de seconde et
+     on passe à la suivante. Le jour où tu l'ajoutes, la page le préfère
+     d'elle-même et l'adresse de l'hébergeur disparaît partout — sans qu'on
+     ait une ligne à changer ici. */
+  const SERVEURS = ['https://app.khalam.app', 'https://bia-render.onrender.com'];
+  let SERVEUR = SERVEURS[SERVEURS.length - 1];
 
   const etat = document.getElementById('etat');
   const etatFr = document.getElementById('etat-fr');
@@ -145,16 +153,24 @@
   }
 
   async function debout() {
-    try {
-      const r = await fetch(SERVEUR + '/api/etat', { cache: 'no-store' });
-      if (!r.ok) return false;
-      const j = await r.json();
-      // `modele` n'existe que dans NOTRE réponse : la page d'attente de
-      // Render, elle, ne renvoie pas de JSON du tout.
-      return Boolean(j && typeof j.modele === 'string');
-    } catch {
-      return false; // service endormi, réseau coupé, ou réponse illisible
+    for (const adresse of SERVEURS) {
+      try {
+        const r = await fetch(adresse + '/api/etat', { cache: 'no-store' });
+        if (!r.ok) continue;
+        const j = await r.json();
+        // `modele` n'existe que dans NOTRE réponse : la page d'attente de
+        // Render, elle, ne renvoie pas de JSON du tout.
+        if (j && typeof j.modele === 'string') {
+          SERVEUR = adresse;            // c'est par là qu'on enverra la personne
+          lien.href = adresse + '/';
+          return true;
+        }
+      } catch {
+        // nom qui n'existe pas encore, service endormi, réseau coupé :
+        // on essaie simplement l'adresse suivante.
+      }
     }
+    return false;
   }
 
   async function boucle() {
