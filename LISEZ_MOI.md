@@ -5,11 +5,10 @@ réveille, puis bascule dessus toute seule.
 
 ## Pourquoi elle existe
 
-BIA est hébergée chez Render : le service s'endort après quinze minutes sans
-visite et met environ une minute à revenir. Pendant ce temps, Render affiche
-**sa** page à lui — fond noir, logo Render, « APPLICATION LOADING ». Sur une
-démonstration, c'est la marque de l'hébergeur qu'on montre, et l'adresse
-`bia-render.onrender.com` reste visible dans la barre du navigateur.
+BIA vit sur `app.khalam.app`. Le serveur s'endort après quinze minutes sans
+visite et met environ une minute à revenir ; pendant ce temps, c'est la page
+de l'hébergeur qui s'affiche — fond noir, « APPLICATION LOADING ». Sur une
+démonstration, c'est sa marque à lui qu'on montre, pas la nôtre.
 
 Cette page-ci vit sur GitHub Pages, qui ne dort jamais. Elle s'affiche tout de
 suite, réveille BIA en arrière-plan, et ne bascule qu'une fois qu'elle répond
@@ -39,12 +38,13 @@ Pages.
 ## Ce qu'il faut savoir
 
 - Le raccourci de l'écran d'accueil doit pointer sur **bia.khalam.app**, plus
-  jamais sur l'adresse Render. Le bouton « Installer » de la page suspend la
+  jamais sur l'adresse de l'hébergeur — elle est désactivée depuis le
+  9 septembre 2026 et ne répond plus du tout. Le bouton « Installer » de la page suspend la
   bascule exprès, pour qu'on puisse poser le raccourci sur la bonne adresse.
 - Si l'adresse du serveur change un jour, une seule ligne à modifier dans
   `index.html` :
 
-      const SERVEUR = 'https://bia-render.onrender.com';
+      const SERVEURS = ['https://app.khalam.app'];
 
 - La page lit `/api/etat` pour savoir si BIA est debout. Cet accès depuis un
   autre domaine exige un en-tête `access-control-allow-origin` côté serveur :
