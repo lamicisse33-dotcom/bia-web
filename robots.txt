@@ -1,0 +1,5 @@
+# bia.khalam.app — KHALAM
+User-agent: *
+Allow: /
+
+Sitemap: https://bia.khalam.app/sitemap.xml
