@@ -131,6 +131,11 @@
   .dit{ margin:0; font-size:12.5px; line-height:1.5; color:var(--doux); text-align:center; min-height:1.5em }
   .dit[data-ton=erreur]{ color:#E7A08A }
   .dit[data-ton=bon]{ color:#A8C79B }
+  /* « Installer sur l'écran d'accueil » est FIXE au bas de la fenêtre : avec
+     le formulaire ouvert, il venait se poser PAR-DESSUS le dernier bouton.
+     On le retire pendant la demande — poser un raccourci n'est pas ce qu'on
+     est venu faire à ce moment-là — et il revient dès qu'on referme. */
+  body.demande-ouverte .poser{ display:none }
 </style>
 </head>
 <body>
@@ -328,11 +333,13 @@
     document.getElementById('ouvrir-demande').addEventListener('click', function(){
       choix.classList.remove('visible');
       demande.classList.add('visible');
+      document.body.classList.add('demande-ouverte');
       numero.focus();
     });
     document.getElementById('fermer-demande').addEventListener('click', function(){
       demande.classList.remove('visible');
       choix.classList.add('visible');
+      document.body.classList.remove('demande-ouverte');
       parler('', '');
     });
 
