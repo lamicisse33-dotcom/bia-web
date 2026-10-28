@@ -35,7 +35,10 @@
 <style>
   :root{ --or:#C9A227; --fond:#0B1020; --doux:rgba(201,162,39,.55); }
   *{box-sizing:border-box}
-  html,body{margin:0;height:100%}
+  /* `height:100%` enfermait la page dans un écran : le formulaire ajouté le
+     28 octobre 2026 la fait grandir, et elle doit pouvoir défiler. */
+  html{height:100%}
+  body{margin:0;min-height:100%}
   body{
     background:var(--fond); color:var(--or);
     font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,sans-serif;
@@ -95,6 +98,39 @@
                 color:var(--doux); line-height:1.7; text-align:left }
   .mode-emploi.visible{ display:block }
   .mode-emploi b{ color:var(--or); font-weight:600 }
+
+  /* ── DEMANDER UN CODE, SUR LA PAGE OFFICIELLE ───────────────────────────
+     Lamine, le 28 octobre 2026 : « c'est SUR CETTE PAGE que doit être
+     Demander un code à KHALAM […] toutes les options sur cette seule page ».
+     Les champs sont à 16 px : en dessous, Safari zoome au premier toucher. */
+  .essai{ margin-top:16px; padding:4px 11px; border:1px solid rgba(201,162,39,.3);
+          border-radius:99px; font-size:10px; letter-spacing:.08em; text-transform:uppercase }
+  .choix{ display:grid; gap:10px; width:min(330px,88vw); margin-top:22px;
+          opacity:0; pointer-events:none; transition:opacity .4s }
+  .choix.visible{ opacity:1; pointer-events:auto }
+  .bouton{ display:flex; align-items:center; justify-content:center;
+           min-height:48px; padding:0 18px; border-radius:24px; border:1px solid var(--or);
+           background:var(--or); color:#0B1020; font:inherit; font-size:14px; font-weight:650;
+           text-decoration:none; cursor:pointer }
+  .bouton.pale{ background:none; color:var(--or); border-color:rgba(201,162,39,.4); font-weight:500 }
+  .bouton:active{ opacity:.75 }
+  .demande{ display:none; width:min(330px,88vw); margin-top:18px; gap:10px; text-align:left;
+            user-select:text; -webkit-user-select:text }
+  .demande.visible{ display:grid }
+  .demande input[type=tel], .demande input[type=text]{
+    width:100%; min-height:48px; padding:0 15px; border-radius:24px;
+    border:1px solid rgba(201,162,39,.3); background:rgba(201,162,39,.06);
+    color:var(--or); font-family:inherit; font-size:16px; line-height:1.4; outline:none }
+  .demande input::placeholder{ color:rgba(201,162,39,.42) }
+  .demande input:focus{ border-color:var(--or) }
+  .accord{ display:flex; align-items:flex-start; gap:11px; font-size:12.5px;
+           line-height:1.5; color:var(--doux); cursor:pointer }
+  .accord input{ flex:0 0 auto; width:22px; height:22px; margin:0; accent-color:var(--or) }
+  /* Le champ piège : hors écran, hors clavier, muet pour un lecteur d'écran. */
+  .piege{ position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden }
+  .dit{ margin:0; font-size:12.5px; line-height:1.5; color:var(--doux); text-align:center; min-height:1.5em }
+  .dit[data-ton=erreur]{ color:#E7A08A }
+  .dit[data-ton=bon]{ color:#A8C79B }
 </style>
 </head>
 <body>
@@ -113,6 +149,31 @@
   <div class="etat" id="etat" role="status" aria-live="polite">Xaaral tuuti…</div>
   <div class="etat-fr" id="etat-fr">Un instant…</div>
   <a class="lien" id="lien" href="https://app.khalam.app/">Dugg léegi · Entrer maintenant</a>
+
+  <span class="essai">BIA est en phase de test : accès sur invitation</span>
+
+  <div class="choix" id="choix">
+    <a class="bouton" id="entrer" href="https://app.khalam.app/">J’ai un code → Entrer dans BIA</a>
+    <button class="bouton pale" id="ouvrir-demande" type="button">Je n’ai pas de code → Demander un code à KHALAM</button>
+  </div>
+
+  <form class="demande" id="demande" novalidate>
+    <input id="numero" name="numero" type="tel" inputmode="tel" autocomplete="tel"
+           placeholder="+221 77 123 45 67" aria-label="Numéro de téléphone">
+    <input id="prenom" name="prenom" type="text" autocomplete="given-name" maxlength="40"
+           placeholder="BIBA" aria-label="Prénom (facultatif)">
+    <div class="piege" aria-hidden="true">
+      <label for="societe">Société</label>
+      <input id="societe" name="societe" type="text" tabindex="-1" autocomplete="off">
+    </div>
+    <label class="accord" for="accord">
+      <input id="accord" type="checkbox">
+      <span>J’accepte que KHALAM garde mon numéro pour m’envoyer un code.</span>
+    </label>
+    <button class="bouton" id="envoyer" type="submit">Demander mon code</button>
+    <p class="dit" id="dit" role="status" aria-live="polite"></p>
+    <button class="bouton pale" id="fermer-demande" type="button">← J’ai déjà un code</button>
+  </form>
 
   <div class="mode-emploi" id="mode-emploi">
     <div>1. Touchez le bouton <b>Partager</b> en bas de Safari — le carré avec une flèche.</div>
@@ -152,6 +213,8 @@
   const etat = document.getElementById('etat');
   const etatFr = document.getElementById('etat-fr');
   const lien = document.getElementById('lien');
+  const choix = document.getElementById('choix');
+  const entrer = document.getElementById('entrer');
 
   /* Durée d'affichage minimale. Quand le serveur est déjà réveillé il répond
      en une fraction de seconde : la page disparaissait avant qu'on ait vu son
@@ -201,7 +264,21 @@
       etatFr.textContent = 'BIA est là.';
       const reste = MINIMUM_MS - (Date.now() - depart);
       if (reste > 0) await new Promise((r) => setTimeout(r, reste));
-      location.replace(SERVEUR + '/');
+      /* ── ON NE BASCULE PLUS TOUT SEUL ─────────────────────────
+
+         Jusqu'au 28 octobre 2026, cette page partait d'elle-même vers
+         l'application dès que BIA répondait : c'était une salle d'attente,
+         et son seul travail était de couvrir le réveil de Render.
+
+         Lamine y met maintenant la demande de code — « toutes les options
+         sur cette seule page ». Une page qui s'en va au bout de trois
+         secondes ne peut pas porter un formulaire : personne ne le verrait.
+
+         Le réveil, lui, reste : on continue d'appeler BIA en arrière-plan,
+         pour que le bouton soit INSTANTANÉ quand il l'appuie. Ce qui change,
+         c'est qu'on ne décide plus à sa place. */
+      entrer.href = SERVEUR + '/';
+      choix.classList.add('visible');
       return;
     }
 
@@ -212,7 +289,10 @@
 
     // Au-delà d'une minute et demie, on cesse de décider à sa place :
     // le lien est là, il entre quand il veut.
-    if (Date.now() - depart > 90000) lien.classList.add('visible');
+    /* Au-delà d'une minute et demie, on cesse d'attendre : les deux chemins
+       s'ouvrent, même si BIA n'a pas encore répondu. Demander un code ne
+       dépend pas de son réveil. */
+    if (Date.now() - depart > 90000) choix.classList.add('visible');
 
     setTimeout(boucle, essais < 6 ? 1500 : 3000);
   }
@@ -231,6 +311,70 @@
   });
 
   boucle();
+
+  /* ── DEMANDER UN CODE ─────────────────────────────────────────────────────
+
+     Cette page vit sur GitHub Pages : il n'y a pas de serveur dessous. La
+     demande part donc vers l'application, sur Render, qui range la ligne et
+     rend le lien WhatsApp. Le numéro de KHALAM n'est PAS écrit ici : il vit
+     dans une variable du serveur et peut changer sans toucher à cette page. */
+  (function(){
+    const demande = document.getElementById('demande');
+    const numero  = document.getElementById('numero');
+    const accord  = document.getElementById('accord');
+    const envoyer = document.getElementById('envoyer');
+    const dit     = document.getElementById('dit');
+
+    document.getElementById('ouvrir-demande').addEventListener('click', function(){
+      choix.classList.remove('visible');
+      demande.classList.add('visible');
+      numero.focus();
+    });
+    document.getElementById('fermer-demande').addEventListener('click', function(){
+      demande.classList.remove('visible');
+      choix.classList.add('visible');
+      parler('', '');
+    });
+
+    /* La MÊME règle que le serveur, pour répondre tout de suite au lieu de
+       faire un aller-retour. C'est le serveur qui tranche pour de bon. */
+    function normaliser(brut){
+      var t = String(brut || '').trim(); if (!t) return null;
+      var plus = t.charAt(0) === '+', c = t.replace(/\D/g, '');
+      if (!c) return null;
+      if (!plus && c.slice(0,2) === '00') c = c.slice(2);
+      else if (!plus && c.length === 9 && c.charAt(0) === '7') return '+221' + c;
+      else if (!plus && c.slice(0,3) === '221' && c.length === 12) return '+' + c;
+      else if (!plus) return null;
+      if (c.length < 8 || c.length > 15 || c.charAt(0) === '0') return null;
+      return '+' + c;
+    }
+    function parler(texte, ton){ dit.textContent = texte; dit.setAttribute('data-ton', ton || ''); }
+
+    demande.addEventListener('submit', function(e){
+      e.preventDefault();
+      var propre = normaliser(numero.value);
+      if (!numero.value.trim()) { parler('Saisis ton num\u00e9ro de t\u00e9l\u00e9phone.', 'erreur'); numero.focus(); return; }
+      if (!propre)              { parler('Ce num\u00e9ro n\u2019est pas valide. Exemple : +221 77 123 45 67.', 'erreur'); numero.focus(); return; }
+      if (!accord.checked)      { parler('Coche la case pour que KHALAM puisse t\u2019envoyer ton code.', 'erreur'); accord.focus(); return; }
+      envoyer.disabled = true; parler('Envoi\u2026', '');
+      fetch(SERVEUR + '/api/demande-code', {
+        method: 'POST', headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ numero: propre, prenom: document.getElementById('prenom').value,
+          accord: true, societe: document.getElementById('societe').value })
+      })
+      .then(function(r){ return r.json().catch(function(){ return null; }); })
+      .then(function(d){
+        envoyer.disabled = false;
+        if (!d || d.ok !== true) { parler((d && d.message) || 'La demande n\u2019a pas pu \u00eatre envoy\u00e9e. R\u00e9essaie dans un instant.', 'erreur'); return; }
+        parler(d.message, 'bon');
+        /* WhatsApp s'ouvre APRÈS que la demande est rangée : si le rangement
+           échoue, on ne fait pas croire que KHALAM a reçu quelque chose. */
+        if (d.whatsapp) window.open(d.whatsapp, '_blank', 'noopener');
+      })
+      .catch(function(){ envoyer.disabled = false; parler('Pas de connexion. R\u00e9essaie dans un instant.', 'erreur'); });
+    });
+  })();
 </script>
 </body>
 </html>
