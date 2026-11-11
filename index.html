@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#0B1020">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="BIA">
+<meta name="apple-mobile-web-app-title" content="Bia Xarit">
 
 <link rel="apple-touch-icon" sizes="180x180" href="icone-180.png">
 <link rel="icon" type="image/png" sizes="32x32" href="icone-32.png">
@@ -18,20 +18,20 @@
      n'avait rien à montrer, et deux de ces pages portaient même le même titre.
      Une page sans description laisse Google en inventer une à partir de ce
      qu'il trouve — ici, « Un instant… ». -->
-<meta name="description" content="BIA écrit à votre place à partir de votre wolof : devis en PDF, lettres, messages prêts à envoyer par WhatsApp ou SMS. Elle lit aussi à voix haute les papiers que vous photographiez. Faite à Dakar.">
+<meta name="description" content="Bia Xarit écrit à votre place à partir de votre wolof : devis en PDF, lettres, messages prêts à envoyer par WhatsApp ou SMS. Elle lit aussi à voix haute les papiers que vous photographiez. Faite à Dakar.">
 <link rel="canonical" href="https://bia.khalam.app/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="KHALAM">
 <meta property="og:locale" content="fr_FR">
 <meta property="og:url" content="https://bia.khalam.app/">
-<meta property="og:title" content="BIA — l'intelligence artificielle en wolof de KHALAM">
-<meta property="og:description" content="BIA écrit à votre place à partir de votre wolof : devis en PDF, lettres, messages prêts à envoyer par WhatsApp ou SMS. Elle lit aussi à voix haute les papiers que vous photographiez. Faite à Dakar.">
+<meta property="og:title" content="Bia Xarit — l'intelligence artificielle en wolof de KHALAM">
+<meta property="og:description" content="Bia Xarit écrit à votre place à partir de votre wolof : devis en PDF, lettres, messages prêts à envoyer par WhatsApp ou SMS. Elle lit aussi à voix haute les papiers que vous photographiez. Faite à Dakar.">
 <meta property="og:image" content="https://khalam.app/partage.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="BIA — l'intelligence artificielle en wolof de KHALAM">
-<meta name="twitter:description" content="BIA écrit à votre place à partir de votre wolof : devis en PDF, lettres, messages prêts à envoyer par WhatsApp ou SMS. Elle lit aussi à voix haute les papiers que vous photographiez. Faite à Dakar.">
+<meta name="twitter:title" content="Bia Xarit — l'intelligence artificielle en wolof de KHALAM">
+<meta name="twitter:description" content="Bia Xarit écrit à votre place à partir de votre wolof : devis en PDF, lettres, messages prêts à envoyer par WhatsApp ou SMS. Elle lit aussi à voix haute les papiers que vous photographiez. Faite à Dakar.">
 <meta name="twitter:image" content="https://khalam.app/partage.png">
-<title>BIA — l'intelligence artificielle en wolof de KHALAM</title>
+<title>Bia Xarit — l'intelligence artificielle en wolof de KHALAM</title>
 <style>
   :root{ --or:#C9A227; --fond:#0B1020; --doux:rgba(201,162,39,.55); }
   *{box-sizing:border-box}
@@ -141,12 +141,12 @@
 <body>
 
   <div class="portrait">
-    <img src="icone-512.png" alt="BIA" width="148" height="148">
+    <img src="icone-512.png" alt="Bia Xarit" width="148" height="148">
     <i aria-hidden="true"></i>
     <i aria-hidden="true"></i>
   </div>
 
-  <div class="nom">BIA</div>
+  <div class="nom">Bia Xarit</div>
   <div class="devise">Wolof mooy sama làkk bu njëkk</div>
   <div class="maison">KHALAM</div>
 
@@ -155,10 +155,10 @@
   <div class="etat-fr" id="etat-fr">Un instant…</div>
   <a class="lien" id="lien" href="https://app.khalam.app/">Dugg léegi · Entrer maintenant</a>
 
-  <span class="essai">BIA est en phase de test : accès sur invitation</span>
+  <span class="essai">Bia Xarit est en phase de test : accès sur invitation</span>
 
   <div class="choix" id="choix">
-    <a class="bouton" id="entrer" href="https://app.khalam.app/">J’ai un code → Entrer dans BIA</a>
+    <a class="bouton" id="entrer" href="https://app.khalam.app/">J’ai un code → Entrer dans Bia Xarit</a>
     <button class="bouton pale" id="ouvrir-demande" type="button">Je n’ai pas de code → Demander un code à KHALAM</button>
   </div>
 
@@ -192,18 +192,18 @@
   /* --------------------------------------------------------------------
      Cette page n'existe que pour couvrir le réveil du serveur.
 
-     BIA est hébergée chez Render : le service s'endort après quinze minutes
+     Bia Xarit est hébergée chez Render : le service s'endort après quinze minutes
      sans visite et met environ une minute à revenir. Pendant ce temps Render
      affiche SA page — fond noir, logo Render, « APPLICATION LOADING ». Sur
      une démonstration, c'est la marque de l'hébergeur qu'on montre.
 
      Cette page-ci vit sur GitHub Pages, toujours éveillé. Elle s'affiche tout
-     de suite, réveille BIA en arrière-plan, et ne bascule qu'une fois qu'elle
+     de suite, réveille Bia Xarit en arrière-plan, et ne bascule qu'une fois qu'elle
      répond vraiment. Le visiteur ne voit que KHALAM.
 
      On interroge /api/etat plutôt que la page d'accueil : tant que le service
      dort, Render répond du HTML et la lecture JSON échoue. Une réponse
-     lisible est donc la preuve que c'est bien BIA qui parle.
+     lisible est donc la preuve que c'est bien Bia Xarit qui parle.
      -------------------------------------------------------------------- */
   /* Deux adresses, dans cet ordre de préférence.
 
@@ -265,21 +265,21 @@
     if (suspendu) { setTimeout(boucle, 1000); return; }
 
     if (await debout()) {
-      etat.textContent = 'BIA mungi fi.';
-      etatFr.textContent = 'BIA est là.';
+      etat.textContent = 'Bia Xarit mungi fi.';
+      etatFr.textContent = 'Bia Xarit est là.';
       const reste = MINIMUM_MS - (Date.now() - depart);
       if (reste > 0) await new Promise((r) => setTimeout(r, reste));
       /* ── ON NE BASCULE PLUS TOUT SEUL ─────────────────────────
 
          Jusqu'au 28 octobre 2026, cette page partait d'elle-même vers
-         l'application dès que BIA répondait : c'était une salle d'attente,
+         l'application dès que Bia Xarit répondait : c'était une salle d'attente,
          et son seul travail était de couvrir le réveil de Render.
 
          Lamine y met maintenant la demande de code — « toutes les options
          sur cette seule page ». Une page qui s'en va au bout de trois
          secondes ne peut pas porter un formulaire : personne ne le verrait.
 
-         Le réveil, lui, reste : on continue d'appeler BIA en arrière-plan,
+         Le réveil, lui, reste : on continue d'appeler Bia Xarit en arrière-plan,
          pour que le bouton soit INSTANTANÉ quand il l'appuie. Ce qui change,
          c'est qu'on ne décide plus à sa place. */
       entrer.href = SERVEUR + '/';
@@ -295,7 +295,7 @@
     // Au-delà d'une minute et demie, on cesse de décider à sa place :
     // le lien est là, il entre quand il veut.
     /* Au-delà d'une minute et demie, on cesse d'attendre : les deux chemins
-       s'ouvrent, même si BIA n'a pas encore répondu. Demander un code ne
+       s'ouvrent, même si Bia Xarit n'a pas encore répondu. Demander un code ne
        dépend pas de son réveil. */
     if (Date.now() - depart > 90000) choix.classList.add('visible');
 
