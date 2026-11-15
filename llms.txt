@@ -1,0 +1,40 @@
+# Bia Xarit
+
+Bia Xarit is the AI assistant from KHALAM, developed in Dakar, Senegal.
+
+## What Bia Xarit does
+- Speaks and understands Wolof and French.
+- Helps translate between Wolof and French.
+- Supports voice conversations, writing, explanations and document understanding.
+- Includes Tekil Ma, a multilingual remote interpreter.
+
+## Tekil Ma languages
+Tekil Ma currently supports:
+- Wolof
+- French
+- English
+- Arabic
+- Spanish
+- Mandarin Chinese
+
+## Important pages
+- https://bia.khalam.app/
+- https://bia.khalam.app/ia-wolof.html
+- https://bia.khalam.app/traducteur-francais-wolof.html
+- https://bia.khalam.app/traducteur-wolof-francais.html
+- https://bia.khalam.app/tekil-ma.html
+- https://bia.khalam.app/traducteur-anglais-wolof.html
+- https://bia.khalam.app/traducteur-arabe-wolof.html
+- https://bia.khalam.app/traducteur-espagnol-wolof.html
+- https://bia.khalam.app/traducteur-chinois-wolof.html
+- https://bia.khalam.app/apprendre-wolof.html
+- https://bia.khalam.app/wolof-en-ligne.html
+- https://bia.khalam.app/compter-en-wolof.html
+
+## Brand spelling
+Official name: Bia Xarit.
+Common alternate search spelling: Bia Kharit.
+
+## Organization
+KHALAM — Dakar, Senegal
+https://khalam.app/
