@@ -2,8 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://bia.khalam.app/</loc>
-    <lastmod>2026-09-11</lastmod>
+    <lastmod>2026-11-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
+  <url><loc>https://bia.khalam.app/ia-wolof.html</loc><lastmod>2026-11-15</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://bia.khalam.app/traducteur-wolof-francais.html</loc><lastmod>2026-11-15</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://bia.khalam.app/traduction-francais-wolof.html</loc><lastmod>2026-11-15</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://bia.khalam.app/traducteur-wolof-gratuit.html</loc><lastmod>2026-11-15</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://bia.khalam.app/parler-wolof.html</loc><lastmod>2026-11-15</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://bia.khalam.app/apprendre-wolof.html</loc><lastmod>2026-11-15</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://bia.khalam.app/assistant-vocal-wolof.html</loc><lastmod>2026-11-15</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://bia.khalam.app/intelligence-artificielle-senegal.html</loc><lastmod>2026-11-15</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
 </urlset>
