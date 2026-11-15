@@ -6,10 +6,10 @@ Bia Xarit is the AI assistant from KHALAM, developed in Dakar, Senegal.
 - Speaks and understands Wolof and French.
 - Helps translate between Wolof and French.
 - Supports voice conversations, writing, explanations and document understanding.
-- Includes Tekil Ma, a multilingual remote interpreter.
+- Includes Tekkil ma, a multilingual remote interpreter.
 
-## Tekil Ma languages
-Tekil Ma currently supports:
+## Tekkil ma languages
+Tekkil ma currently supports:
 - Wolof
 - French
 - English
