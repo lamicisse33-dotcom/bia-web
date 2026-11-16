@@ -4,13 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#0B1020">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Bia Xarit">
 
 <link rel="apple-touch-icon" sizes="180x180" href="icones/bia-or-20261116-180.png">
 <link rel="icon" type="image/png" sizes="32x32" href="icones/bia-or-20261116-32.png">
-<link rel="manifest" href="manifeste.json?v=bia-or-20261116">
+<!-- Pas de manifeste ici (16 novembre 2026) : cette page est la porte, pas l’application.
+     Un raccourci posé depuis cette adresse ouvrait la porte, sans notifications ni micro.
+     L’installation se fait depuis app.khalam.app, qui propose elle-même son guide. -->
 
 <!-- ── CE QUE GOOGLE LIT ─────────────────────────────────────────────────────
      Ajouté le 11 septembre 2026. Cette page n'avait ni description, ni adresse
@@ -18,18 +17,18 @@
      n'avait rien à montrer, et deux de ces pages portaient même le même titre.
      Une page sans description laisse Google en inventer une à partir de ce
      qu'il trouve — ici, « Un instant… ». -->
-<meta name="description" content="Bia Xarit est l’intelligence artificielle en wolof et français de KHALAM, développée à Dakar : conversation, traduction, voix, écriture et aide au quotidien.">
+<meta name="description" content="Bia Xarit, l’intelligence artificielle de KHALAM qui parle wolof et français : Tekkil ma (interprète à distance), lecture d’ordonnances et de documents, rappels de médicaments, pharmacie la plus proche, recherche, messages, devis, factures et carnet du commerçant. Développée à Dakar.">
 <link rel="canonical" href="https://bia.khalam.app/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="KHALAM">
 <meta property="og:locale" content="fr_FR">
 <meta property="og:url" content="https://bia.khalam.app/">
 <meta property="og:title" content="Bia Xarit — IA wolof, traducteur et assistant vocal au Sénégal">
-<meta property="og:description" content="Bia Xarit parle wolof et français : conversation, traduction, voix, écriture et aide au quotidien. Une intelligence artificielle de KHALAM développée à Dakar.">
+<meta property="og:description" content="Parlez. Elle s’occupe du reste. Bia Xarit parle wolof et français : Tekkil ma, documents, rappels, pharmacie, recherche, écriture, carnet. Une intelligence artificielle de KHALAM, développée à Dakar.">
 <meta property="og:image" content="https://khalam.app/partage.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Bia Xarit — IA wolof, traducteur et assistant vocal au Sénégal">
-<meta name="twitter:description" content="Bia Xarit parle wolof et français : conversation, traduction, voix, écriture et aide au quotidien.">
+<meta name="twitter:description" content="Parlez. Elle s’occupe du reste. Bia Xarit parle wolof et français : Tekkil ma, documents, rappels, pharmacie, recherche, écriture, carnet.">
 <meta name="twitter:image" content="https://khalam.app/partage.png">
 <title>Bia Xarit — IA wolof et traducteur au Sénégal</title>
 <style>
@@ -137,7 +136,7 @@
      est venu faire à ce moment-là — et il revient dès qu'on referme. */
   body.demande-ouverte .poser{ display:none }
 </style>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Bia Xarit","alternateName":["Bia Kharit"],"applicationCategory":"AIApplication","operatingSystem":"Web","url":"https://bia.khalam.app/","description":"Assistant d’intelligence artificielle de KHALAM en wolof et français, développé à Dakar.","creator":{"@type":"Organization","name":"KHALAM","url":"https://khalam.app/"}}</script></head>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Bia Xarit","alternateName":["Bia Kharit"],"applicationCategory":"AIApplication","operatingSystem":"Web","url":"https://bia.khalam.app/","description":"Intelligence artificielle de KHALAM en wolof et français, développée à Dakar : Tekkil ma (interprète à distance), lecture de documents, rappels, pharmacie la plus proche, recherche, écriture, carnet du commerçant.","featureList":["Tekkil ma — conversation interprétée à distance","Lecture d’ordonnances et de documents photographiés","Rappels de médicaments","Pharmacie, hôpital ou restaurant le plus proche","Numéros d’urgence","Recherche sur internet et dans les annonces du Sénégal","Carte et itinéraire","Messages, mails, devis et factures dictés","Carnet du commerçant : dettes, caisse, commandes, stock","Images, vidéos et photo à la voix"],"sameAs":["https://khalam.app/bia"],"creator":{"@type":"Organization","name":"KHALAM","url":"https://khalam.app/"}}</script></head>
 <body>
 
   <div class="portrait">
@@ -181,14 +180,33 @@
   </form>
 
   <div class="mode-emploi" id="mode-emploi">
-    <div>1. Touchez le bouton <b>Partager</b> en bas de Safari — le carré avec une flèche.</div>
-    <div>2. Descendez jusqu’à <b>Sur l’écran d’accueil</b>.</div>
-    <div>3. Touchez <b>Ajouter</b>.</div>
+    <div>L’installation se fait <b>depuis Bia Xarit elle-même</b>, pas depuis cette page.</div>
+    <div>1. Touchez <b>Entrer dans Bia Xarit</b> et donnez votre code.</div>
+    <div>2. Dans Safari, touchez <b>Partager</b> — le carré avec une flèche — puis <b>Sur l’écran d’accueil</b>, puis <b>Ajouter</b>.</div>
+    <div>Bia s’ouvrira alors comme une application, avec ses notifications et ses rappels.</div>
   </div>
 
   <div class="poser"><button id="poser" type="button">Installer sur l’écran d’accueil</button></div>
 
-<section class="referencement" aria-label="Découvrir Bia Xarit" style="width:min(760px,92vw);margin:36px auto 10px;padding:22px;border:1px solid rgba(201,162,39,.2);border-radius:18px;text-align:left;color:rgba(201,162,39,.75);font-size:13px;line-height:1.8"><h1 style="color:#C9A227;font-size:24px;line-height:1.2;margin:0 0 12px">Bia Xarit — intelligence artificielle en wolof et français</h1><p style="margin:0 0 10px">Bia Xarit est l’assistante IA de KHALAM développée à Dakar. Elle permet de parler en wolof ou en français, de traduire des phrases, de préparer des messages et d’utiliser Tekkil ma pour des conversations interprétées avec plusieurs langues.</p><p style="margin:0 0 12px">Tekkil ma prend actuellement en charge le wolof, le français, l’anglais, l’arabe, l’espagnol et le chinois mandarin. Deux personnes peuvent rejoindre un même salon à distance, choisir leur langue et converser depuis leur propre appareil.</p><div style="margin-top:10px;display:flex;flex-wrap:wrap;gap:8px"><a href="/ia-wolof.html">IA wolof</a> · <a href="/traducteur-wolof-francais.html">Traducteur wolof français</a> · <a href="/traduction-francais-wolof.html">Français vers wolof</a> · <a href="/traducteur-wolof-gratuit.html">Traducteur wolof en ligne</a> · <a href="/parler-wolof.html">Parler wolof</a> · <a href="/apprendre-wolof.html">Apprendre le wolof</a> · <a href="/assistant-vocal-wolof.html">Assistant vocal wolof</a> · <a href="/intelligence-artificielle-senegal.html">IA Sénégal</a></div> · <a href="/tekil-ma.html">Tekkil ma</a> · <a href="/traducteur-anglais-wolof.html">Anglais ↔ wolof</a> · <a href="/traducteur-arabe-wolof.html">Arabe ↔ wolof</a> · <a href="/traducteur-espagnol-wolof.html">Espagnol ↔ wolof</a> · <a href="/traducteur-chinois-wolof.html">Chinois ↔ wolof</a> · <a href="/interprete-wolof-en-ligne.html">Interprète wolof</a> · <a href="/wolof-en-ligne.html">Wolof en ligne</a> · <a href="/jours-semaine-wolof.html">Jours</a> · <a href="/mois-en-wolof.html">Mois</a> · <a href="/compter-en-wolof.html">Nombres</a> · <a href="/phrases-utiles-wolof.html">Phrases utiles</a> · <a href="/expressions-wolof.html">Expressions</a> · <a href="/dictionnaire-wolof-francais.html">Dictionnaire</a> · <a href="/bonjour-en-wolof.html">Bonjour en wolof</a> · <a href="/merci-en-wolof.html">Merci en wolof</a> · <a href="/je-taime-en-wolof.html">Je t’aime</a> · <a href="/amour-en-wolof.html">Amour</a> · <a href="/proverbes-wolof.html">Proverbes</a> · <a href="/histoire-en-wolof.html">Histoire</a> · <a href="/google-traduction-wolof.html">Google Traduction wolof</a> · <a href="/a-propos-bia-xarit.html">À propos</a> · <a href="/faq-bia-xarit.html">FAQ</a> · <a href="/presse-bia-xarit.html">Presse</a></section>
+<section class="referencement" aria-label="Découvrir Bia Xarit" style="width:min(760px,92vw);margin:36px auto 10px;padding:22px;border:1px solid rgba(201,162,39,.2);border-radius:18px;text-align:left;color:rgba(201,162,39,.8);font-size:13.5px;line-height:1.8">
+<h1 style="color:#C9A227;font-size:24px;line-height:1.2;margin:0 0 6px">Bia Xarit — l’intelligence artificielle qui parle votre langue</h1>
+<p style="margin:0 0 12px;font-size:15px;color:#C9A227">Parlez. Elle s’occupe du reste.</p>
+<p style="margin:0 0 12px">Créée par KHALAM à Dakar, Bia Xarit vous écoute en wolof ou en français, vous répond à la voix et vous aide à comprendre, écrire, traduire, chercher, vous déplacer et gérer vos activités. Pas besoin de connaître l’informatique : vous lui parlez comme à une personne.</p>
+<p style="margin:0 0 16px"><a href="https://khalam.app/bia" style="color:#C9A227;font-weight:600">Découvrir tout ce que Bia Xarit fait → khalam.app/bia</a></p>
+<h2 style="color:#C9A227;font-size:17px;margin:14px 0 6px">Tekkil ma — deux personnes, deux langues, une conversation</h2>
+<p style="margin:0 0 10px">Dites « Tekkil ma ». Bia ouvre un salon, vous envoyez le lien par WhatsApp, chacun parle sa langue et entend la sienne. Wolof · Français · Anglais · Arabe · Espagnol · Chinois mandarin — à la voix, à distance.</p>
+<h2 style="color:#C9A227;font-size:17px;margin:14px 0 6px">Montrez-lui un document</h2>
+<p style="margin:0 0 10px">Ordonnance, même écrite à la main, facture, courrier, contrat : Bia lit ce qui est visible et vous l’explique en wolof ou en français. Quand une ligne n’est pas lisible, elle vous le dit au lieu de deviner.</p>
+<h2 style="color:#C9A227;font-size:17px;margin:14px 0 6px">Votre quotidien</h2>
+<p style="margin:0 0 10px">« Rappelle-moi mon médicament à 8 h » : Bia vous le rappelle chaque jour à l’heure dite, en wolof ou en français, même si l’application est fermée. « Trouve-moi la pharmacie la plus proche » : elle cherche la pharmacie, l’hôpital ou le restaurant le plus proche de vous et vous montre où il se trouve. En cas de besoin, elle donne tout de suite les numéros utiles : police · gendarmerie · pompiers · SAMU.</p>
+<h2 style="color:#C9A227;font-size:17px;margin:14px 0 6px">Elle cherche pour vous</h2>
+<p style="margin:0 0 10px">Une voiture d’occasion, un appartement aux Almadies, la météo, un prix : Bia fouille internet et les annonces du Sénégal et vous lit ce qu’elle trouve. « Amène-moi aux Almadies » : elle ouvre la carte, vous situe et indique la direction et la distance.</p>
+<h2 style="color:#C9A227;font-size:17px;margin:14px 0 6px">Vous parlez. Elle écrit.</h2>
+<p style="margin:0 0 10px">Dictez un message WhatsApp, un mail, un devis ou une facture : Bia rédige sous vos yeux, garde vos documents et les partage en un geste. Pour les commerçants, elle tient le carnet — dettes, caisse, commandes, stock — et relit vos chiffres sans jamais en inventer.</p>
+<h2 style="color:#C9A227;font-size:17px;margin:14px 0 6px">Une IA avec qui vous pouvez vraiment parler</h2>
+<p style="margin:0 0 10px">Demandez-lui d’expliquer une leçon, de lire un SMS en wolof, de dire une somme en wolof, de vous montrer le Lac Rose en images, de vous prendre en photo, ou simplement de vous tenir compagnie. Elle retient ce que vous choisissez de lui confier.</p>
+<p style="margin:0 0 14px">Langues : wolof et français ; anglais, arabe, espagnol et allemand se choisissent dans son menu. Tekkil ma : wolof, français, anglais, arabe, espagnol, chinois mandarin.</p>
+<div style="margin-top:10px;display:flex;flex-wrap:wrap;gap:8px"><a href="/ia-wolof.html">IA wolof</a> · <a href="/traducteur-wolof-francais.html">Traducteur wolof français</a> · <a href="/traduction-francais-wolof.html">Français vers wolof</a> · <a href="/traducteur-wolof-gratuit.html">Traducteur wolof en ligne</a> · <a href="/parler-wolof.html">Parler wolof</a> · <a href="/apprendre-wolof.html">Apprendre le wolof</a> · <a href="/assistant-vocal-wolof.html">Assistant vocal wolof</a> · <a href="/intelligence-artificielle-senegal.html">IA Sénégal</a></div> · <a href="/tekil-ma.html">Tekkil ma</a> · <a href="/traducteur-anglais-wolof.html">Anglais ↔ wolof</a> · <a href="/traducteur-arabe-wolof.html">Arabe ↔ wolof</a> · <a href="/traducteur-espagnol-wolof.html">Espagnol ↔ wolof</a> · <a href="/traducteur-chinois-wolof.html">Chinois ↔ wolof</a> · <a href="/interprete-wolof-en-ligne.html">Interprète wolof</a> · <a href="/wolof-en-ligne.html">Wolof en ligne</a> · <a href="/jours-semaine-wolof.html">Jours</a> · <a href="/mois-en-wolof.html">Mois</a> · <a href="/compter-en-wolof.html">Nombres</a> · <a href="/phrases-utiles-wolof.html">Phrases utiles</a> · <a href="/expressions-wolof.html">Expressions</a> · <a href="/dictionnaire-wolof-francais.html">Dictionnaire</a> · <a href="/bonjour-en-wolof.html">Bonjour en wolof</a> · <a href="/merci-en-wolof.html">Merci en wolof</a> · <a href="/je-taime-en-wolof.html">Je t’aime</a> · <a href="/amour-en-wolof.html">Amour</a> · <a href="/proverbes-wolof.html">Proverbes</a> · <a href="/histoire-en-wolof.html">Histoire</a> · <a href="/google-traduction-wolof.html">Google Traduction wolof</a> · <a href="/a-propos-bia-xarit.html">À propos</a> · <a href="/faq-bia-xarit.html">FAQ</a> · <a href="/presse-bia-xarit.html">Presse</a></section>
 <script>
   /* --------------------------------------------------------------------
      Cette page n'existe que pour couvrir le réveil du serveur.

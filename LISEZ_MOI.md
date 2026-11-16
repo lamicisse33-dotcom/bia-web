@@ -37,7 +37,7 @@ Pages.
 
 ## Ce qu'il faut savoir
 
-- Le raccourci de l'écran d'accueil doit pointer sur **bia.khalam.app**, plus
+- (Dépassé depuis le 16 novembre 2026 : le raccourci de l'écran d'accueil se pose depuis **app.khalam.app**, l'application elle-même ; cette page n'a plus de manifeste et n'est plus installable. Elle sert de porte et de vitrine pour Google, et renvoie vers la page officielle khalam.app/bia.) Ancien texte : le raccourci de l'écran d'accueil doit pointer sur bia.khalam.app, plus
   jamais sur l'adresse de l'hébergeur — elle est désactivée depuis le
   9 septembre 2026 et ne répond plus du tout. Le bouton « Installer » de la page suspend la
   bascule exprès, pour qu'on puisse poser le raccourci sur la bonne adresse.
